@@ -1,9 +1,21 @@
-import React from 'react'
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import { useAuthInit } from "./hooks/useAuthInit";
 
-const App = () => {
+export default function App() {
+  const isLoading = useAuthInit();
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Checking session...
+      </div>
+    );
+  }
+
   return (
-    <div >App</div>
-  )
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
-
-export default App
